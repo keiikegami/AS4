@@ -224,7 +224,41 @@ And the results are as follows.
 \section{}
 	\lstinputlisting[caption=problem 4]{4.py}
 	\subsection{}
-	
+		Let $\theta = (p_a, p_b, p_o)$ and ${\bf Y_{obs}} = (n_A, n_B, n_O, n_{AB})$. The missing values are ${\bf Z} = (z_{AO}, z_{BO})$. I calculate Q-function as follows.
+		\begin{align}
+			Q(\theta | \theta^{(t)}) &= E_{\theta^{(t)}} [{\rm log} L(\theta | {\bf Y_{obs}}, {\bf Z}) | \theta^{(t)}, {\bf Y_{obs}}]
+			=  \int {\rm log} L(\theta | {\bf Y_{obs}}, {\bf Z}) f({\bf Z} | \theta^{(t)}, {\bf Y_{obs}}) \mathrm{d} {\bf Z} \nonumber \\
+			&= \sum_{j = 0}^{n_{B}} \sum_{i = 0}^{n_{A}} {\rm log} L(\theta | {\bf Y_{obs}}, z_{AO} = i, z_{BO} = j) P(z_{AO} = i, z_{BO} = j | \theta^{(t)}, {\bf Y_{obs}})
+		\end{align}
+		Now I can get the joint probability mass function of ($z_{AO}, z_{BO}$) as follows.
+		\begin{align*}
+			P_{ij} &= P(z_{AO} = i, z_{BO} = j | \theta^{(t)}, {\bf Y_{obs}}) \\
+			&= \binom{n_A}{i} (q_A)^i (1-q_A)^{n_A - i} *  \binom{n_B}{j} (q_B)^j (1-q_B)^{n_B - j}
+		\end{align*}
+		where
+		\begin{align*}
+			q_A = \frac{2p_A^{(t)} p_O^{(t)}}{2p_A^{(t)} p_O^{(t)} + (p_A^{(t)})^2} = \frac{2p_O^{(t)}}{2p_O^{(t)} + p_A^{(t)}} \\[10pt]
+			q_B = \frac{2p_B^{(t)} p_O^{(t)}}{2p_B^{(t)} p_O^{(t)} + (p_B^{(t)})^2} = \frac{2p_O^{(t)}}{2p_O^{(t)} + p_B^{(t)}}
+		\end{align*}
+		And the log likelihood function is transformed into the below.
+		\begin{align*}
+			{\rm log} L(\theta | {\bf Y_{obs}}, z_{AO} = i, z_{BO} = j) &= {\rm log} (2p_A p_O)^i (p_A^2)^{n_A - i} (2p_Bp_O)^j (p_B^2)^{n_B - j} (p_O^2)^{n_O} (2p_A p_B)^{n_{AB}}\\
+			&= (2n_A + n_{AB} - i) {\rm log}\ p_A + (2n_B + n_{AB} - j) {\rm log}\ p_B \\&\quad + (2n_O + i + j) {\rm log}\ p_O + \text{unrelated terms}
+		\end{align*}
+		Then the maximization step is written as follows.
+		\begin{align*}
+			&\max_{\theta} \sum_{j = 0}^{n_{B}} \sum_{i = 0}^{n_{A}} P_{ij} (2n_A + n_{AB} - i) {\rm log}\ p_A + (2n_B + n_{AB} - j) {\rm log}\ p_B + (2n_O + i + j) {\rm log}\ p_O \\
+			&\text{s.t.}\ p_A + p_B + p_O = 1
+		\end{align*}
+		By using the method of Lagrange multiplier, we can get the below conditions.
+		\begin{align*}
+			\frac{\partial Q}{\partial p_A} = \frac{\sum_j \sum_i P_{ij} (2n_A + n_{AB} -i)}{p_A} - \frac{\sum_j \sum_i P_{ij} (2n_O + i + j)}{1 - p_A - p_B} = 0 \\[10pt]
+			\frac{\partial Q}{\partial p_B} = \frac{\sum_j \sum_i P_{ij} (2n_B + n_{AB} -i)}{p_B} - \frac{\sum_j \sum_i P_{ij} (2n_O + i + j)}{1 - p_A - p_B} = 0
+		\end{align*}
+		Since $n_A = n_B$, the above two conditions mean that $p_A^{(t +1)} = p_B^{(t+1)}$. Thus I get the maximizer of Q function under the constraint.
+		\begin{align*}
+			k
+		\end{align*}
 	\subsection{}
 	By using the above code, I get the estimation result after 100 iterations. \par The result is $[p_a, p_b, p_o] = [ 0.28021178,  0.28021178,  0.43957643]$.
 \section{}
