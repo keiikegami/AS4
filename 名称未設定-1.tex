@@ -265,7 +265,57 @@ And the results are as follows.
 	\subsection{}
 	By using the above code, I get the estimation result after 100 iterations. \par The result is $[p_a, p_b, p_o] = [ 0.28021178,  0.28021178,  0.43957643]$.
 \section{}
-	\lstinputlisting[caption=problem 5]{5.py}
+	\subsection{}
+		First I specify the distribution of the missing values, which is $u_i$, conditional on the observed values.
+		\begin{align*}
+			f(u_i | y_i, \theta) &\propto f(u_i, y_i) = f(y_i | u_i) f(u_i) = f(y_{i, 1}, y_{i, 2}, \dots, y_{i, J} | u_i) f(u_i) = \left\{ \Pi_j f(y_{i, j} | u_i)\right\} f(u_i)\\[10pt]
+			&\propto \left\{ \Pi_j \exp(-\frac{(y_{ij} - \beta_0 -\beta_1 x_{ij} - u_i)^2}{2\sigma_{\epsilon}^2}) \right\} \exp(-\frac{u_i^2}{2\sigma_u^2})\\[10pt]
+			&\propto \exp \left(-\frac{1}{2\sigma_\epsilon^2} \left( \sum_j u_i^2 - 2u_i \sum_j (y_{ij} - \beta_0 - \beta_1 x_{ij}) \right) - \frac{u_i^2}{2\sigma_u^2} \right)\\[10pt]
+			&\propto \exp \left( -\frac{J\sigma_u^2 + \sigma_\epsilon^2}{2\sigma_u^2 \sigma_\epsilon^2} \left( u_i - \frac{\sigma_u^2}{J\sigma_u^2 + \sigma_\epsilon^2} \sum_j (y_{ij} - \beta_0 - \beta_1 x_{ij}) \right)^2 \right)
+		\end{align*}
+		This means that $f(u_i | y_i , \theta) = N\left( \frac{\sigma_u^2}{J\sigma_u^2 + \sigma_\epsilon^2} \sum_j (y_{ij} - \beta_0 - \beta_1 x_{ij}), \frac{\sigma_u^2 \sigma_\epsilon^2}{J\sigma_u^2 + \sigma_\epsilon^2} \right)$. Let this mean be $E_t$ and the variance be $V_t$ when the parameters are t-step estimation results.\par
+		Then I get Q function as follows.
+		\begin{align}
+			Q(\theta | \theta^{(t)}) &= \int \dots \int {\rm log} L(\theta | y, u) \Pi_i f(u_i | y_i, \theta^{(t)}) \mathrm(d)u_1 \dots \mathrm(d)u_I \nonumber \\
+			&= \int \dots \int \left\{ \sum_i \sum_j {\rm log} f(y_{ij} | u_i) + {\rm log} f(u_i) \right\} \Pi_i f(u_i | y_i, \theta^{(t)}) \mathrm(d)u_1 \dots \mathrm(d)u_I \nonumber \\
+			&= \sum_i \left[ \int \left\{ \sum_j {\rm log} f(y_{ij} | u_i) + {\rm log} f(u_i) \right\} f(u_i | y_i) \mathrm(d)u_i \right] \nonumber \\
+			&= \sum_i \sum_j \int {\rm log} f(y_{ij} | u_i) f(u_i | \theta^{(t)}, y_i) \mathrm(d)u_i + \sum_i \sum_j \int {\rm log} f(u_i) f(u_i | \theta^{(t)}, y_i) \mathrm(d)u_i 
+		\end{align}
+		Then I remove the unrelated terms from (2) and separate it into the left part and the right part. Let the left part of (2) be a, and the right one be b. Now I get the below transformations.
+		\begin{align}
+			a &= -\sum_i \sum_j \int {\rm log}\ \sigma_\epsilon^2 f(u_i | \theta^{(t)}, y_i) \mathrm(d) u_i - \sum_i \sum_j \int \frac{(y_{ij} - \beta_0 -\beta_1 x_{ij} - u_i)^2}{2\sigma_\epsilon^2} f(u_i | \theta^{(t+1)}, y_i) \mathrm(d)u_i \nonumber \\
+			&= -IJ{\rm log}\ \sigma_\epsilon^2 -\frac{\sum_i \sum_j (y_{ij} - \beta - \beta_1 x_{ij})^2}{2\sigma_\epsilon^2} + \frac{\sum_i \sum_j (y_{ij} - \beta - \beta_1 x_{ij}) E_t}{\sigma_\epsilon^2} - \frac{\sum_i \sum_j V_t + E_t^2}{2\sigma_\epsilon^2}\\[15pt]
+			b &= -\sum_i \sum_j \int {\rm log}\ \sigma_u^2 f(u_i | \theta^{(t)}, y_i) \mathrm(d)u_i  - \sum_i \sum_j \int \frac{u_i^2}{2\sigma_u^2} f(u_i | \theta^{(t)}, y_i) \mathrm(d)u_i \nonumber \\
+			&= -IJ {\rm log}\ \sigma_u^2 -\frac{\sum_i \sum_j V_t + E_t^2}{2\sigma_u^2}
+		\end{align}
+		By the above, Q function is $a + b$. Then the maximization step is done by differentiating the Q function by each parameter. By using (3) and (4), I get the belows.
+		\begin{align}
+			&\frac{\partial Q}{\partial \beta_0} = -\frac{IJ}{\sigma_\epsilon^2}\beta_0 + \frac{\sum_i \sum_j (y_{ij} - \beta_1 x_{ij})}{\sigma_\epsilon^2} - \frac{J\sum_i E_t}{\sigma_\epsilon^2} = 0\\[10pt]
+			&\frac{\partial Q}{\partial \beta_1} = -\frac{\sum_i \sum_j x_{ij}^2}{\sigma_\epsilon^2}\beta_1 + \frac{\sum_i \sum_j x_{ij} (y_{ij} - \beta_0)}{\sigma_\epsilon^2} - \frac{\sum_i \sum_j x_{ij} E_t}{\sigma_\epsilon^2} = 0\\[10pt]
+			&\frac{\partial Q}{\partial \sigma_\epsilon^2} = -\frac{IJ}{2\sigma_\epsilon^2} + \frac{\sum_i \sum_j (y_{ij} - \beta_0 -\beta_1 x_{ij})^2}{2(\sigma_\epsilon^2)^2} - \frac{\sum_i \sum_j (y_{ij} - \beta_0 -\beta_1 x_{ij}) E_t}{(\sigma_\epsilon^2)^2} + \frac{\sum_i \sum_j V_t + E_t^2}{2(\sigma_\epsilon^2)^2} = 0\\[10pt]
+			&\frac{\partial Q}{\partial \sigma_u^2} = -\frac{IJ}{2\sigma_u^2} + \frac{\sum_i \sum_j V_t + E_t^2}{2(\sigma_u^2)^2} = 0
+		\end{align}
+		Note that $E_t$ and $V_t$ depend on the previous estimation results.\par
+		By (5) and (6) I can get the next estimations of $\beta_0$ and $\beta_1$ as follows. Let
+		\begin{align*}
+			\sum_i \sum_j x_{ij} y_{ij} = XY\\
+			\sum_i \sum_j x_{ij} = X\\
+			\sum_i \sum_j y_{ij} = Y\\
+			\sum_i \sum_j x_{ij}^2 = X_2
+		\end{align*}
+		According to the above notations, 
+		\begin{align*}
+			&\beta_1^{(t+1)} = \frac{IJ*XY - X*Y - J\left\{ I\sum_i \sum_j x_{ij}E_t - (\sum_i E_t)*X \right\}}{IJ*X_2 - X*X}\\[10pt]
+			&\beta_0^{(t+1)} = \frac{Y - \beta_1^{(t)}*X - J \sum_i E_t}{IJ}
+		\end{align*}
+		By (7) and (8), 
+		\begin{align*}
+			&(\sigma_\epsilon^2)^{(t+1)} = V_t + \frac{\sum_i \sum_j (y_{ij} - \beta_0^{(t)} - \beta_1^{(t)}x_{ij})^2 + J \sum_i E_t^2 - 2\sum_i \sum_j (y_{ij} - \beta_0^{(t)} - \beta_1^{(t)}x_{ij})E_t}{IJ}\\[10pt]
+			&(\sigma_u^2)^{(t+1)} = V_t + \frac{J\sum_i E_t^2}{IJ}
+		\end{align*}
+		Repeat the above improvements until convergence.
+	\subsection{}
+		\lstinputlisting[caption=problem 5]{5.py}
 
 \end{document}
 
