@@ -65,7 +65,17 @@ And the results are as follows.
 	\lstinputlisting[caption=problem 2]{2.py}
 	In the below question, I mean the weights by the values multiplied by weight functions.
 	\subsection{}
-	 	I prove the integral of standard normal probability distribution function is equal to $1$.
+	 	I prove $\int_{-\infty}^{\infty} \exp\left( -\frac{x^2}{2} \right) \mathrm{d}x = \sqrt{2\pi}$. Let $I = \int_{-\infty}^{\infty} \exp\left( -\frac{x^2}{2} \right) \mathrm{d}x$.
+		\begin{align*}
+			I^2 &= \left( \int_{-\infty}^{\infty} \exp\left( -\frac{x^2}{2} \right) \mathrm{d}x \right) \left( \int_{-\infty}^{\infty} \exp\left( -\frac{y^2}{2} \right) \mathrm{d}y \right)\\
+			&= \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} \exp \left( -\frac{1}{2} (x^2 + y^2)\right) \mathrm{d}x \mathrm{d}y\\
+			&= \int_{0}^{2\pi} \int_{0}^{\infty} \exp \left( -\frac{r^2}{2} \right) r \mathrm{d}r \mathrm{d}\theta\\
+			&= 2\pi \int_{0}^{\infty} \exp \left( -\frac{r^2}{2} \right) r \mathrm{d}r\\
+			&= 2\pi \int_{0}^{\infty} \left( -\exp \left( -\frac{r^2}{2} \right)\right)^{'} \mathrm{d}r\\
+			&= 2\pi [-\exp \left( -\frac{r^2}{2} \right)]_{0}^{\infty}\\
+			&= 2\pi
+		\end{align*}
+		Thus I get the proof. In other words, $I = \sqrt{2\pi}$ since $\exp\left( -\frac{x^2}{2} \right)$ is always bigger than 0.
 	\subsection{}
 		I use the above code to compute the approximation of the integral.\par
 		When the number of nodes is 5, \par the approximation result is 0.99684628222456162, \par the nodes are [-2.02018287, -0.95857246,  0.        ,  0.95857246,  2.02018287], \par the weights are [1.1814886255359833,
@@ -320,6 +330,8 @@ And the results are as follows.
 		The biases of parameters are [-0.00220228, -0.00313101, -0.01689459,  0.00997698].
 		\par
 		The standard deviations are [ 0.08100258,  0.07864963,  0.06433125,  0.09524904].
+		\par
+		Note that the parameters are $[\beta_0, \beta_1, \sigma_\epsilon, \sigma_u]$. And it seems that the estimation of $\sigma_u$ is more difficult than that of $\sigma_\epsilon$ because of the amount of data.
 \end{document}
 
 
