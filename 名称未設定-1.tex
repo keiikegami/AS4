@@ -257,8 +257,11 @@ And the results are as follows.
 		\end{align*}
 		Since $n_A = n_B$, the above two conditions mean that $p_A^{(t +1)} = p_B^{(t+1)}$. Thus I get the maximizer of Q function under the constraint.
 		\begin{align*}
-			k
+			&p_B^{(t+1)} = p_A^{(t+1)} = \frac{1}{2 + \frac{\sum_j \sum_i P_{ij} (2n_O + i + j)}{\sum_j \sum_i P_{ij} (2n_A + n_{AB} - i)}}\\[10pt]
+			&p_O^{(t+1)} = 1 - 2 p_A^{(t+1)}
 		\end{align*}
+		Note that $P_{ij}$ depends on the previous step estimation results.
+		Repeat the above improvement until converge.
 	\subsection{}
 	By using the above code, I get the estimation result after 100 iterations. \par The result is $[p_a, p_b, p_o] = [ 0.28021178,  0.28021178,  0.43957643]$.
 \section{}
