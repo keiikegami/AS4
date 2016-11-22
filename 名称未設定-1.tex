@@ -63,14 +63,170 @@ And the results are as follows.
 \end{description}
 \section{}
 	\lstinputlisting[caption=problem 2]{2.py}
+	In the below question, I mean the weights by the values multiplied by weight functions.
 	\subsection{}
 	 	I prove the integral of standard normal probability distribution function is equal to $1$.
 	\subsection{}
-		I use the above code to compute the approximation of the integral.
+		I use the above code to compute the approximation of the integral.\par
+		When the number of nodes is 5, \par the approximation result is 0.99684628222456162, \par the nodes are [-2.02018287, -0.95857246,  0.        ,  0.95857246,  2.02018287], \par the weights are [1.1814886255359833,
+ 0.98658099675142807,
+ 0.94530872048294179,
+ 0.98658099675142807,\par
+ 1.1814886255359833]
+ 		\par
+		\ 
+		\par
+		When the number of nodes is 10, \par
+		the approximation result is 0.99998763906433263 \par
+		the nodes are [-3.43615912, -2.53273167, -1.75668365, -1.03661083, -0.34290133,
+         0.34290133,  1.03661083,  1.75668365, \par 2.53273167,  3.43615912], \par
+         	and the weights are [1.0254516913657519,
+ 0.82066612640481784,
+ 0.74144193194356545,
+ 0.70329632310490586,\par
+ 0.6870818539512733,
+ 0.6870818539512733,
+ 0.70329632310490586,
+ 0.74144193194356545,
+ 0.82066612640481784,\par
+ 1.0254516913657519] \par
+ 		\ 
+		\par
+ 		When the number of nodes is 20, \par
+		the approximation result is 0.99999999979803234, \par
+		the nodes are [-5.38748089, -4.60368245, -3.94476404, -3.34785457, -2.78880606,
+        -2.254974  , -1.73853771, -1.23407622, \par -0.73747373, -0.24534071,
+         0.24534071,  0.73747373,  1.23407622,  1.73853771,  2.254974  ,
+         2.78880606,  3.34785457,  \par 3.94476404,  4.60368245,  5.38748089], \par
+         	and the weights are [0.89859196145317,
+ 0.70433296117692357,
+ 0.62227869619138665,
+ 0.57526244285250083,\par
+ 0.54485174236452072,
+ 0.52408035094855054,
+ 0.50967902711745705,
+ 0.49992087133628998,
+ 0.4938433852720529,\par
+ 0.49092150066674595,
+ 0.49092150066674595,
+ 0.4938433852720529,
+ 0.49992087133628998,
+ 0.50967902711745705,\par
+ 0.52408035094855054,
+ 0.54485174236452072,
+ 0.57526244285250083,
+ 0.62227869619138665,
+ 0.70433296117692357,\par
+ 0.89859196145317] \par
+ 		\ 
+		\par
+ 		When the number of nodes is 30, \par
+		the approximation result is 0.99999999999999634, \par
+		the nodes are [-6.86334529, -6.13827922, -5.53314715, -4.98891897, -4.48305536,
+        -4.0039086 , -3.54444387, -3.09997053, \par-2.66713212, -2.24339147,
+        -1.82674114, -1.4155278 , -1.00833827, -0.60392106, -0.20112858,
+         0.20112858,  0.60392106, \par 1.00833827,  1.4155278 ,  1.82674114,
+         2.24339147,  2.66713212,  3.09997053,  3.54444387,  4.0039086 ,
+         4.48305536,  \par 4.98891897,  5.53314715,  6.13827922,  6.86334529], \par
+         and the weights are [0.83424747101269592,
+ 0.64909798155433118,
+ 0.56940269194957616,
+ 0.52252568933130883,\par
+ 0.49105799583287552,
+ 0.4683748125647248,
+ 0.451321035991189,
+ 0.43817702265268194,
+ 0.42791806293273793,\par
+ 0.41989500373682354,
+ 0.41367936361113872,
+ 0.40898157500353133,
+ 0.40560512332568432,
+ 0.40341981692480389,\par
+ 0.40234606670190304,
+ 0.40234606670190304,
+ 0.40341981692480389,
+ 0.40560512332568432,
+ 0.40898157500353133,\par
+ 0.41367936361113872,
+ 0.41989500373682354,
+ 0.42791806293273793,
+ 0.43817702265268194,
+ 0.451321035991189,\par
+ 0.4683748125647248,
+ 0.49105799583287552,
+ 0.52252568933130883,
+ 0.56940269194957616,
+ 0.64909798155433118,\par
+ 0.83424747101269592]. \par
+         
 \section{}
 	\lstinputlisting[caption=problem 3]{3.py}
+	In the below questions, I mean the weights by the values not multiplied by the weight functions.
+	\subsection{}
+		When I use Legendre polynomial as orthogonal polynomial, 
+		\par
+		the approximation result is -49.506283813990549,
+		\par
+		the nodes are [-0.90617985, -0.53846931,  0.        ,  0.53846931,  0.90617985],\par
+		the weights are [ 0.23692689,  0.47862867,  0.56888889,  0.47862867,  0.23692689].
+		\par
+		\ 
+		\par
+		When I use Chebyshev type 1 polynomial as orthogonal polynomial, 
+		\par
+		the approximation result is -57.161045874594777,
+		\par
+		the nodes are [ -9.51056516e-01,  -5.87785252e-01,   6.12323400e-17,
+          5.87785252e-01,   9.51056516e-01,]\par
+		the weights are [ 0.62831853,  0.62831853,  0.62831853,  0.62831853,  0.62831853].
+		\par
+		\ 
+		\par
+		When I use Chebyshev type 2 polynomial as orthogonal polynomial, 
+		\par
+		the approximation result is -40.789633611622008,
+		\par
+		the nodes are [ -8.66025404e-01,  -5.00000000e-01,   6.12323400e-17,
+          5.00000000e-01,   8.66025404e-01]\par
+		the weights are [ 0.13089969,  0.39269908,  0.52359878,  0.39269908,  0.13089969].
+		
+	\subsection{}
+		When I use Legendre polynomial as orthogonal polynomial, 
+		\par
+		the approximation result is -49.493963006199031,
+		\par
+		the nodes are [-0.97390653, -0.86506337, -0.67940957, -0.43339539, -0.14887434,
+         0.14887434,  0.43339539,  0.67940957, \par 0.86506337,  0.97390653],\par
+		the weights are [ 0.06667134,  0.14945135,  0.21908636,  0.26926672,  0.29552422,
+         0.29552422,  0.26926672,  0.21908636, \par 0.14945135,  0.06667134].
+		\par
+		\ 
+		\par
+		When I use Chebyshev type 1 polynomial as orthogonal polynomial, 
+		\par
+		the approximation result is -50.987455239343021,
+		\par
+		the nodes are [-0.98768834, -0.89100652, -0.70710678, -0.4539905 , -0.15643447,
+         0.15643447,  0.4539905 ,  0.70710678, \par 0.89100652,  0.98768834]\par
+		the weights are [ 0.31415927,  0.31415927,  0.31415927,  0.31415927,  0.31415927,
+         0.31415927,  0.31415927,  0.31415927, \par 0.31415927,  0.31415927].
+		\par
+		\ 
+		\par
+		When I use Chebyshev type 2 polynomial as orthogonal polynomial, 
+		\par
+		the approximation result is -47.101342989695162,
+		\par
+		the nodes are [-0.95949297, -0.84125353, -0.65486073, -0.41541501, -0.14231484,
+         0.14231484,  0.41541501,  0.65486073, \par 0.84125353,  0.95949297]\par
+		the weights are [ 0.02266894,  0.08347854,  0.16312218,  0.23631356,  0.27981494,
+         0.27981494,  0.23631356,  0.16312218, \par 0.08347854,  0.02266894].
 \section{}
 	\lstinputlisting[caption=problem 4]{4.py}
+	\subsection{}
+	
+	\subsection{}
+	By using the above code, I get the estimation result after 100 iterations. \par The result is $[p_a, p_b, p_o] = [ 0.28021178,  0.28021178,  0.43957643]$.
 \section{}
 	\lstinputlisting[caption=problem 5]{5.py}
 
