@@ -1,0 +1,100 @@
+\documentclass{article}
+\usepackage[margin = .7in]{geometry}
+\usepackage[dvipdfmx]{graphicx}
+\usepackage{listings}
+\usepackage{amsmath}
+\usepackage{bm}
+\lstset{%
+  language={python},
+  basicstyle={\small},%
+  identifierstyle={\small},%
+  commentstyle={\small\itshape},%
+  keywordstyle={\small\bfseries},%
+  ndkeywordstyle={\small},%
+  stringstyle={\small\ttfamily},
+  frame={tb},
+  breaklines=true,
+  columns=[l]{fullflexible},%
+  numbers=left,%
+  xrightmargin=0zw,%
+  xleftmargin=3zw,%
+  numberstyle={\scriptsize},%
+  stepnumber=1,
+  numbersep=1zw,%
+  lineskip=-0.5ex%
+}
+
+\begin{document}
+\title{STAT6011/7611/6111/3317 \\ 
+COMPUTATIONAL STATISTICS (2016 Fall) \\
+Assignment 4}
+\author{Kei Ikegami (u3535947)}
+\maketitle
+
+\section{}
+The code is below. I denote the 'Fair' by 0 and 'Loaded' by 1 in this code.
+	\lstinputlisting[caption=problem 1]{1.py}
+And the results are as follows.
+\begin{description}
+	\item[(a)] [ 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
+      	0,  0,  0,  0,  0,  1,  1,  1,  1,  1,  1,  1,  1,
+        0,  0,  1,  1,  1,  1,  0,  0,  1,  1,  1,  1,  1,
+        0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
+        0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
+        0,  0,  0,  0]
+	\item[(b)] [ 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
+        0,  0,  0,  0,  0,  0,  1,  1,  1,  1,  1,  1,  1,
+        1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,
+        1,  0,  1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
+        0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
+        0,  0,  0,  0]
+	\item[(c)] [ 0,  1,  0,  0,  0,  1,  0,  0,  0,  0,  0,  0,  0,
+        1,  0,  0,  1,  1,  1,  1,  1,  1,  0,  1,  1,  0,
+        0,  1,  1,  1,  1,  0,  0,  1,  1,  1,  1,  1,  0,
+        0,  0,  1,  0,  0,  1,  1,  0,  0,  0,  0,  0,  0,
+        0,  1,  0,  0,  0,  0,  1,  0,  0,  1,  0,  0,  0,
+        1,  0,  0,  0]
+	\item[(d)] [ 0,  1,  0,  0,  0,  1,  0,  0,  0,  0,  0,  0,  0,
+        1,  0,  0,  1,  1,  1,  1,  1,  1,  0,  1,  1,  0,
+        0,  1,  1,  1,  1,  0,  0,  1,  1,  1,  1,  1,  0,
+        0,  0,  1,  0,  0,  1,  1,  0,  0,  0,  0,  0,  0,
+        0,  1,  0,  0,  0,  0,  1,  0,  0,  1,  0,  0,  0,
+        1,  0,  0,  0]
+\end{description}
+\section{}
+	\lstinputlisting[caption=problem 2]{2.py}
+	\subsection{}
+	 	I prove the integral of standard normal probability distribution function is equal to $1$.
+	\subsection{}
+		I use the above code to compute the approximation of the integral.
+\section{}
+	\lstinputlisting[caption=problem 3]{3.py}
+\section{}
+	\lstinputlisting[caption=problem 4]{4.py}
+\section{}
+	\lstinputlisting[caption=problem 5]{5.py}
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
